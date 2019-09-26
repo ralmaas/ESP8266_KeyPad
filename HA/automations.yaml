@@ -1,0 +1,46 @@
+# Switch on  light if last keypad entry was 1
+- id: Keypad1
+  alias: Keypad1
+  trigger: 
+    platform: template
+    value_template: "{{states('sensor.keypad') == '1'}}"
+  action:
+    - service: light.turn_on
+      entity_id: light.ikea_large_light
+
+# Switch off light if last keypad entry was 2
+- id: Keypad2
+  alias: Keypad2
+  trigger: 
+    platform: template
+    value_template: "{{states('sensor.keypad') == '2'}}"
+  action:
+    - service: light.turn_off
+      entity_id: light.ikea_large_light
+
+# Toggle light if last keypad entry was 3
+- id: Keypad3
+  alias: Keypad3
+  trigger:
+    platform: template
+    value_template: "{{states('sensor.keypad') == '3'}}"
+  action:
+    service_template: >
+      {% if is_state('light.ikea_small_light','off') %}
+        light.turn_on
+      {% else %}
+        light.turn_off
+      {% endif %}
+    entity_id: light.ikea_small_light
+
+# Set sensor.keypad to 123 if last key was 3
+- id: Keypad3a
+  alias: Keypad3a
+  trigger:
+    platform: template
+    value_template: "{{states('sensor.keypad') == '3'}}"
+  action:
+    service: python_script.set_state
+    data_template:
+      entity_id: sensor.keypad
+      state: 123

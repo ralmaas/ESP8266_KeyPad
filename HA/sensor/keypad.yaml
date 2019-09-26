@@ -1,0 +1,4 @@
+- platform: mqtt
+  name: "KeyPad"
+  unit_of_measurement: ""
+  state_topic: "KEYPAD/C0"
