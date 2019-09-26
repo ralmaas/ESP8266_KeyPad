@@ -11,9 +11,17 @@ By long-press of the #-key the module switches between sending keys as they are 
 
 The unit have two LED's; one for indicating connection to the MQTT-server and one that is blinking when data is transmitted.
 
+The default topic used is "KEYPAD/C0".
+This may be changed by hitting * followed by a number-key. For instance hitting '*' followed by '5' will change the topic to "KEYPAD/C5".
+This gives a keypad with 10 x 10 keys !!!
+Example: Channel 0 and 1 are controlling 20 light toggles while channel 2 is controlling up to 10 blind-toggling.
+
+Improvement: Add a small 128x32 OLED display to show mode, channel and digit pressed.
+This will require a small change of pins in moving the "keyboard scanner" pins D1 and D2 to the Tx/Rx pins to free up the I2C pins. After this modification all I/O pins of the Wemos D1 will be in use !!
+
 Home Assistant
 ==============
-The keypad is set up as a sensor in HA:
+The keypad is set up as a sensor in HA (using the default 'channel' 0:
 - platform: mqtt
   name: "KeyPad"
   unit_of_measurement: ""
