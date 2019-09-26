@@ -28,6 +28,7 @@ The keypad is set up as a sensor in HA (using the default 'channel' 0:
   state_topic: "KEYPAD/C0"
 
 Usage:
+======
 Example 1: Use digit 1 and 2 to turn on/off a light
 ===================================================
 - id: Keypad1
